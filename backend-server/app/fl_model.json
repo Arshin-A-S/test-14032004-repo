@@ -1,0 +1,208 @@
+{
+  "version": 2,
+  "schema": "context-anomaly-model",
+  "last_updated": "2025-08-25T22:14:15Z",
+  "decision": {
+    "method": "logit_weighted",
+    "threshold": 0.14026538687788287,
+    "weights": {
+      "location": 0.9970089730807579,
+      "device": 0.0009970089730807579,
+      "time": 0.0009970089730807579,
+      "department": 0.0009970089730807579
+    },
+    "eps": 1e-06
+  },
+  "smoothing": {
+    "type": "laplace",
+    "success_prior": 1.0,
+    "fail_prior": 1.0
+  },
+  "feature_spec": {
+    "location": {
+      "type": "categorical"
+    },
+    "device": {
+      "type": "categorical"
+    },
+    "time_bucket": {
+      "type": "categorical",
+      "buckets": [
+        "bucket_0_6",
+        "bucket_6_12",
+        "bucket_12_18",
+        "bucket_18_24"
+      ]
+    },
+    "department": {
+      "type": "categorical"
+    }
+  },
+  "stats": {
+    "seeded": true,
+    "global": {
+      "success": 8616,
+      "fail": 9345
+    },
+    "location_stats": {
+      "bangalore": {
+        "success": 1683,
+        "fail": 274
+      },
+      "blacklisted_region": {
+        "success": 0,
+        "fail": 2894
+      },
+      "chennai": {
+        "success": 3416,
+        "fail": 308
+      },
+      "delhi": {
+        "success": 1259,
+        "fail": 202
+      },
+      "mumbai": {
+        "success": 2258,
+        "fail": 182
+      },
+      "suspicious_location": {
+        "success": 0,
+        "fail": 2746
+      },
+      "unknown_country": {
+        "success": 0,
+        "fail": 2739
+      }
+    },
+    "device_stats": {
+      "desktop": {
+        "success": 1273,
+        "fail": 135
+      },
+      "laptop1": {
+        "success": 2217,
+        "fail": 240
+      },
+      "legion": {
+        "success": 2541,
+        "fail": 292
+      },
+      "phone1": {
+        "success": 1741,
+        "fail": 191
+      },
+      "suspicious_browser": {
+        "success": 0,
+        "fail": 2745
+      },
+      "tablet": {
+        "success": 844,
+        "fail": 108
+      },
+      "tor_exit_node": {
+        "success": 0,
+        "fail": 2762
+      },
+      "unknown_device": {
+        "success": 0,
+        "fail": 2872
+      }
+    },
+    "department_stats": {
+      "cs": {
+        "success": 5157,
+        "fail": 593
+      },
+      "eng": {
+        "success": 1271,
+        "fail": 154
+      },
+      "external": {
+        "success": 0,
+        "fail": 4159
+      },
+      "math": {
+        "success": 2188,
+        "fail": 219
+      },
+      "unknown": {
+        "success": 0,
+        "fail": 4220
+      }
+    },
+    "time_stats": {
+      "bucket_0_6": {
+        "success": 0,
+        "fail": 6692
+      },
+      "bucket_12_18": {
+        "success": 5724,
+        "fail": 648
+      },
+      "bucket_18_24": {
+        "success": 0,
+        "fail": 1687
+      },
+      "bucket_6_12": {
+        "success": 2892,
+        "fail": 318
+      }
+    }
+  },
+  "aggregation": {
+    "algorithm": "FedAvg",
+    "robust_aggregation": {
+      "enabled": true,
+      "type": "trimmed_mean",
+      "trim_ratio": 0.1
+    }
+  },
+  "validation": {
+    "holdout_enabled": true,
+    "metrics": {
+      "val_size": 5987,
+      "roc_auc_anomaly": 1.0,
+      "target_fpr": 0.05,
+      "chosen_threshold": 0.14026538687788287,
+      "actual_fpr": 0.06105197244834064,
+      "accuracy": 0.967429430432604,
+      "precision": 0.9347389558232931,
+      "recall": 1.0
+    }
+  },
+  "learned": {
+    "global_success_rate": 0.47970828926125925,
+    "location_success_rate": {
+      "bangalore": 0.8596222562531904,
+      "blacklisted_region": 0.0003453038674033149,
+      "chennai": 0.9170692431561996,
+      "delhi": 0.861244019138756,
+      "mumbai": 0.9250614250614251,
+      "suspicious_location": 0.000363901018922853,
+      "unknown_country": 0.00036483035388544326
+    },
+    "device_success_rate": {
+      "desktop": 0.9035460992907801,
+      "laptop1": 0.9019926799511997,
+      "legion": 0.8966490299823633,
+      "phone1": 0.9007238883143743,
+      "suspicious_browser": 0.00036403349108117945,
+      "tablet": 0.8857442348008385,
+      "tor_exit_node": 0.000361794500723589,
+      "unknown_device": 0.0003479471120389701
+    },
+    "time_success_rate": {
+      "bucket_0_6": 0.00014938751120406333,
+      "bucket_12_18": 0.8981801066834013,
+      "bucket_18_24": 0.0005920663114268798,
+      "bucket_6_12": 0.9006849315068494
+    },
+    "department_success_rate": {
+      "cs": 0.8967315716272601,
+      "eng": 0.8913805185704274,
+      "external": 0.0002403268445085316,
+      "math": 0.908675799086758,
+      "unknown": 0.00023685457129322596
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-08-25T22:45:10.146870",
+  "benchmarks": {
+    "encryption": {
+      "1MB": {
+        "avg_encryption_time_sec": 0.01100015640258789,
+        "avg_decryption_time_sec": 0.007467349370320638,
+        "avg_encryption_throughput_MB_sec": 102.35579255676672,
+        "avg_decryption_throughput_MB_sec": 135.06559376625032,
+        "min_encryption_throughput": 59.33376715235536,
+        "max_encryption_throughput": 124.38623962040332,
+        "trials": 3
+      },
+      "5MB": {
+        "avg_encryption_time_sec": 0.01854221026102702,
+        "avg_decryption_time_sec": 0.01708380381266276,
+        "avg_encryption_throughput_MB_sec": 272.04063125226025,
+        "avg_decryption_throughput_MB_sec": 294.41062680527364,
+        "min_encryption_throughput": 237.81277995123887,
+        "max_encryption_throughput": 295.7692687398632,
+        "trials": 3
+      },
+      "10MB": {
+        "avg_encryption_time_sec": 0.030336459477742512,
+        "avg_decryption_time_sec": 0.028853813807169598,
+        "avg_encryption_throughput_MB_sec": 331.4279302320717,
+        "avg_decryption_throughput_MB_sec": 346.6879427460896,
+        "min_encryption_throughput": 297.8951405559738,
+        "max_encryption_throughput": 349.86937154868957,
+        "trials": 3
+      }
+    },
+    "fl_scoring": {
+      "total_requests": 1000,
+      "avg_time_ms": 0.0006868839263916016,
+      "min_time_ms": 0.000476837158203125,
+      "max_time_ms": 0.017404556274414062,
+      "requests_per_sec": 1455850.0520652551,
+      "avg_score": 0.25777080425173954,
+      "score_range": [
+        0.07681066499273166,
+        0.5212474312348924
+      ]
+    },
+    "s3_operations": {
+      "upload": {
+        "1MB": {
+          "avg_time_sec": 2.1442288160324097,
+          "avg_throughput_MB_sec": 0.46636813782325603,
+          "successful_trials": 2
+        },
+        "5MB": {
+          "avg_time_sec": 3.861530303955078,
+          "avg_throughput_MB_sec": 1.294823452473977,
+          "successful_trials": 2
+        }
+      },
+      "download": {
+        "1MB": {
+          "avg_time_sec": 1.159126877784729,
+          "avg_throughput_MB_sec": 0.8627183263243406,
+          "successful_trials": 2
+        },
+        "5MB": {
+          "avg_time_sec": 4.360954165458679,
+          "avg_throughput_MB_sec": 1.1465380763693733,
+          "successful_trials": 2
+        }
+      }
+    },
+    "false_positive_rate": {
+      "false_positive_rate": 0.0,
+      "true_positive_rate": 1.0,
+      "accuracy": 1.0,
+      "threshold_used": 0.14026538687788287,
+      "total_samples": 250,
+      "confusion_matrix": {
+        "true_positives": 50,
+        "false_positives": 0,
+        "true_negatives": 200,
+        "false_negatives": 0
+      }
+    }
+  }
+}

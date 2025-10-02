@@ -1,0 +1,40 @@
+{
+    "load_test": {
+        "1_users": {
+            "concurrent_users": 1,
+            "total_requests": 10,
+            "successful_requests": 10,
+            "success_rate": 1.0,
+            "avg_response_time_sec": 0.001221776008605957,
+            "requests_per_second": 768.2297562137114,
+            "total_time_sec": 0.013016939163208008
+        },
+        "5_users": {
+            "concurrent_users": 5,
+            "total_requests": 50,
+            "successful_requests": 50,
+            "success_rate": 1.0,
+            "avg_response_time_sec": 0.003772878646850586,
+            "requests_per_second": 1214.7121856283957,
+            "total_time_sec": 0.04116201400756836
+        },
+        "10_users": {
+            "concurrent_users": 10,
+            "total_requests": 100,
+            "successful_requests": 100,
+            "success_rate": 1.0,
+            "avg_response_time_sec": 0.007200722694396973,
+            "requests_per_second": 1250.3775604201012,
+            "total_time_sec": 0.07997584342956543
+        },
+        "20_users": {
+            "concurrent_users": 20,
+            "total_requests": 200,
+            "successful_requests": 200,
+            "success_rate": 1.0,
+            "avg_response_time_sec": 0.01361901044845581,
+            "requests_per_second": 1301.6794295866987,
+            "total_time_sec": 0.15364766120910645
+        }
+    }
+}

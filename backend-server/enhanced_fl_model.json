@@ -1,0 +1,31 @@
+{
+  "version": 3,
+  "schema": "ensemble-anomaly-model",
+  "ensemble_weights": {
+    "random_forest": 0.35,
+    "gradient_boosting": 0.35,
+    "logistic_regression": 0.25,
+    "isolation_forest": 0.025,
+    "one_class_svm": 0.025
+  },
+  "feature_names": [
+    "hour_sin",
+    "hour_cos",
+    "is_weekend",
+    "is_night",
+    "is_business_hours",
+    "location_encoded",
+    "device_encoded",
+    "department_encoded",
+    "location_frequency",
+    "device_frequency",
+    "location_user_pattern",
+    "device_user_pattern",
+    "hour_user_pattern",
+    "label_user_pattern"
+  ],
+  "performance": {
+    "roc_auc": 0.9640212218440875,
+    "test_samples": 7185
+  }
+}

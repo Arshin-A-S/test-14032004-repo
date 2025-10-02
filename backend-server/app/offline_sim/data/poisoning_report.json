@@ -1,0 +1,14 @@
+{
+  "poison_mode": "location_bias",
+  "poison_frac": 0.3,
+  "naive": {
+    "threshold": 0.17024026902183226,
+    "precision@thr": 0.17716535433070865,
+    "recall@thr": 0.0807899461400359
+  },
+  "robust_trimmed_mean": {
+    "threshold": 0.1799425605762845,
+    "precision@thr": 0.2491103202846975,
+    "recall@thr": 0.12567324955116696
+  }
+}

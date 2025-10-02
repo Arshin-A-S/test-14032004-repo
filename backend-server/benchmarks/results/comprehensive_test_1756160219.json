@@ -1,0 +1,10 @@
+{
+  "test_run_timestamp": "2025-08-25T22:16:59.528323",
+  "test_results": {
+    "component_benchmark": {
+      "success": false,
+      "output": "",
+      "errors": "python: can't open file '/home/arshinas/Final Year Project Implementation/backend-server/benchmarks/performance_benchmark.py': [Errno 2] No such file or directory\n"
+    }
+  }
+}

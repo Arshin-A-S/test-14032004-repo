@@ -1,0 +1,141 @@
+{
+  "version": 2,
+  "schema": "context-anomaly-model",
+  "last_updated": "2025-08-23T21:59:22Z",
+  "decision": {
+    "method": "logit_weighted",
+    "threshold": 0.65,
+    "weights": {
+      "location": 0.5,
+      "device": 0.3,
+      "time": 0.2
+    },
+    "eps": 1e-06
+  },
+  "smoothing": {
+    "type": "laplace",
+    "success_prior": 1.0,
+    "fail_prior": 1.0
+  },
+  "cold_start": {
+    "strategy": "backoff_and_mfa",
+    "mfa_rounds": 3,
+    "min_successes_to_warm": 5,
+    "unknown_backoff_order": [
+      "user",
+      "device",
+      "department",
+      "location",
+      "global"
+    ]
+  },
+  "feature_spec": {
+    "location": {
+      "type": "categorical"
+    },
+    "device": {
+      "type": "categorical"
+    },
+    "time_bucket": {
+      "type": "categorical",
+      "buckets": [
+        "bucket_0_6",
+        "bucket_6_12",
+        "bucket_12_18",
+        "bucket_18_24"
+      ]
+    }
+  },
+  "stats": {
+    "seeded": true,
+    "global": {
+      "success": 5768,
+      "fail": 1232
+    },
+    "location_stats": {
+      "chennai": {
+        "success": 284,
+        "fail": 52
+      },
+      "mumbai": {
+        "success": 278,
+        "fail": 58
+      }
+    },
+    "device_stats": {
+      "laptop1": {
+        "success": 2025,
+        "fail": 456
+      },
+      "legion": {
+        "success": 2613,
+        "fail": 506
+      },
+      "phone1": {
+        "success": 1130,
+        "fail": 270
+      }
+    },
+    "department_stats": {
+      "cs": {
+        "success": 5768,
+        "fail": 1232
+      }
+    },
+    "time_stats": {
+      "bucket_0_6": {
+        "success": 1115,
+        "fail": 252
+      },
+      "bucket_12_18": {
+        "success": 1757,
+        "fail": 404
+      },
+      "bucket_18_24": {
+        "success": 845,
+        "fail": 185
+      },
+      "bucket_6_12": {
+        "success": 2051,
+        "fail": 391
+      }
+    }
+  },
+  "aggregation": {
+    "algorithm": "FedAvg",
+    "robust_aggregation": {
+      "enabled": true,
+      "type": "trimmed_mean",
+      "trim_ratio": 0.1
+    },
+    "clip": {
+      "enabled": true,
+      "max_l2_norm": 1.0
+    },
+    "dp_noise": {
+      "enabled": false,
+      "sigma": 0.0
+    }
+  },
+  "validation": {
+    "holdout_enabled": false
+  },
+  "learned": {
+    "global_success_rate": 0.8239074550128535,
+    "location_success_rate": {
+      "chennai": 0.8431952662721893,
+      "mumbai": 0.8254437869822485
+    },
+    "device_success_rate": {
+      "laptop1": 0.8159484494563028,
+      "legion": 0.837552066645306,
+      "phone1": 0.8067047075606276
+    },
+    "time_success_rate": {
+      "bucket_0_6": 0.8151935719503287,
+      "bucket_12_18": 0.812760055478502,
+      "bucket_18_24": 0.8197674418604651,
+      "bucket_6_12": 0.839607201309329
+    }
+  }
+}
