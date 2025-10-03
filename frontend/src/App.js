@@ -16,11 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <h1>Secure Data Governance Hub</h1>
         {user && (
-          // Show user info and logout button if logged in
-          <div>
+          <div className="card">
             <p>Welcome, {user.id}!</p>
             <button onClick={handleLogout}>Logout</button>
           </div>
@@ -29,12 +28,17 @@ function App() {
       <main>
         {user ? (
           <>
-            <UploadFile user={user} onUploadSuccess={handleUploadSuccess} />
-            <hr />
-            <FileList user={user} key={refreshKey} />
+            <div className="card">
+              <UploadFile user={user} onUploadSuccess={handleUploadSuccess} />
+            </div>
+            <div className="card">
+              <FileList user={user} key={refreshKey} />
+            </div>
           </>
         ) : (
-          <Login onLoginSuccess={(loggedInUser) => setUser(loggedInUser)} />
+          <div className="card">
+            <Login onLoginSuccess={handleLoginSuccess} />
+          </div>
         )}
       </main>
     </div>
