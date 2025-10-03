@@ -4,6 +4,7 @@ import os
 import uuid
 import json
 
+from components.event_logger import log_event, get_events
 from components.crypto_component import CryptoComponent
 from components.s3_component import S3Component
 from components.context_component import ContextComponent
@@ -67,8 +68,10 @@ def login():
     username = j.get("username")
     user = user_comp.get_user(username)
     if not user:
+        log_event(username, "LOGIN_FAIL", {"reason": "unknown user"})
         return jsonify({"ok": False, "error": "unknown user"}), 404
-    return jsonify({"ok": True, "user": user}), 200
+    log_event(username, "LOGIN_SUCCESS")
+    return jsonify({"ok": True, "user": user})
 
 # ---------------- Upload ----------------
 @app.route("/upload", methods=["POST"])
@@ -147,6 +150,7 @@ def upload():
     except Exception:
         pass
 
+    log_event(username, "UPLOAD_SUCCESS", {"file_id": fid, "s3_key": s3_key})
     return jsonify({"success": True, "file_id": fid, "s3_key": s3_key})
 
 
@@ -194,7 +198,9 @@ def download():
         threshold = fl_comp.model.get("global_threshold", 0.6)
     #threshold = 1.5  # Temporarily disable FL checks
     if score >= threshold:
+        log_event(username, "DOWNLOAD_FLAGGED", {"file_id": fid, "score": score})
         return jsonify({"success": False, "error": "access flagged", "score": score}), 403
+
 
     # ✅ BACK TO S3 DOWNLOAD
     s3_key = fmeta.get("s3_key")
@@ -229,20 +235,20 @@ def download():
         os.remove(local_tmp)
     except Exception:
         pass
-
+    log_event(username, "DOWNLOAD_SUCCESS", {"file_id": fid})
     return send_file(dec_path, as_attachment=True, download_name=fmeta["orig_filename"])
 
 @app.route("/api/events", methods=["GET"])
-def get_events():
-    # In a real application, you would fetch these from a database or a log file.
-    # For now, we'll return a hardcoded list of example events.
-    mock_events = [
-        {"id": 1, "user": "alice", "action": "LOGIN_SUCCESS", "is_anomaly": False, "timestamp": "2025-10-03T21:30:00Z"},
-        {"id": 2, "user": "bob", "action": "UPLOAD_FILE", "file_id": "file-123", "is_anomaly": False, "timestamp": "2025-10-03T21:32:00Z"},
-        {"id": 3, "user": "unknown", "action": "LOGIN_FAIL", "is_anomaly": True, "timestamp": "2025-10-03T21:33:00Z"},
-        {"id": 4, "user": "alice", "action": "DOWNLOAD_FILE", "file_id": "file-456", "is_anomaly": False, "timestamp": "2025-10-03T21:35:00Z"},
-    ]
-    return jsonify({"success": True, "events": mock_events})
+def list_events():
+    events = get_events()
+    # We can also add anomaly detection information here
+    for event in events:
+        # Simple rule: failed logins are anomalies
+        if event['action'] == 'LOGIN_FAIL' or event['action'] == 'DOWNLOAD_FLAGGED':
+            event['is_anomaly'] = True
+        else:
+            event['is_anomaly'] = False
+    return jsonify({"success": True, "events": events})
     
 # ✅ ADD THIS CRITICAL CODE TO START THE SERVER
 if __name__ == "__main__":
