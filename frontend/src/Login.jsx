@@ -3,8 +3,8 @@ import './App.css';
 import Login from './Login.jsx';
 import Dashboard from './Dashboard.jsx';
 import FileList from './FileList.jsx';
-import UploadFile from './UploadFile.js';
-import Navigation from './Navigation.js'; // Import our new navigation
+import UploadFile from './UploadFile.jsx';
+import Navigation from './Navigation.jsx'; // Import our new navigation
 
 function App() {
   const [user, setUser] = useState(null);
