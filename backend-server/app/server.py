@@ -12,7 +12,7 @@ from components.user_component import UserComponent
 from components.file_component import FileComponent
 
 app = Flask(__name__)
-
+CORS(app)
 # Configure S3
 S3_BUCKET = "file-storage-00414"
 S3_REGION = "eu-central-1"

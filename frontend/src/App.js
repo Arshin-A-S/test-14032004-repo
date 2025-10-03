@@ -28,11 +28,13 @@ function App() {
       </header>
       <main>
         {user ? (
-          // If user is logged in, show the file list
-          <FileList user={user} />
+          <>
+            <UploadFile user={user} onUploadSuccess={handleUploadSuccess} />
+            <hr />
+            <FileList user={user} key={refreshKey} />
+          </>
         ) : (
-          // Otherwise, show the login form
-          <Login onLoginSuccess={handleLoginSuccess} />
+          <Login onLoginSuccess={(loggedInUser) => setUser(loggedInUser)} />
         )}
       </main>
     </div>
