@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import Login from './Login.js';
-import Dashboard from './Dashboard.js'; // Import the new Dashboard
+import Login from './Login.jsx';
+import Dashboard from './Dashboard.jsx';
+import FileList from './FileList.jsx';
+import UploadFile from './UploadFile.jsx';
+import Navigation from './Navigation.jsx';
 
 function App() {
   const [user, setUser] = useState(null);

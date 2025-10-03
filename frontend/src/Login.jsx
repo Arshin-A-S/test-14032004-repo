@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import Login from './Login.js';
-import Dashboard from './Dashboard.js';
-import FileList from './FileList.js';
+import Login from './Login.jsx';
+import Dashboard from './Dashboard.jsx';
+import FileList from './FileList.jsx';
 import UploadFile from './UploadFile.js';
 import Navigation from './Navigation.js'; // Import our new navigation
 
