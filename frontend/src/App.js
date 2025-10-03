@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import FileList from './FileList';
-import Login from './Login';
+import Login from './Login.js';
+import Dashboard from './Dashboard.js'; // Import the new Dashboard
 
 function App() {
-  const [user, setUser] = useState(null); // State to hold the logged-in user
+  const [user, setUser] = useState(null);
 
   const handleLoginSuccess = (loggedInUser) => {
     setUser(loggedInUser);
@@ -27,14 +27,9 @@ function App() {
       </header>
       <main>
         {user ? (
-          <>
-            <div className="card">
-              <UploadFile user={user} onUploadSuccess={handleUploadSuccess} />
-            </div>
-            <div className="card">
-              <FileList user={user} key={refreshKey} />
-            </div>
-          </>
+          <div className="card">
+            <Dashboard />
+          </div>
         ) : (
           <div className="card">
             <Login onLoginSuccess={handleLoginSuccess} />

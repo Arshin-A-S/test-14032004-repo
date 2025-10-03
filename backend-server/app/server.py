@@ -232,6 +232,18 @@ def download():
 
     return send_file(dec_path, as_attachment=True, download_name=fmeta["orig_filename"])
 
+@app.route("/api/events", methods=["GET"])
+def get_events():
+    # In a real application, you would fetch these from a database or a log file.
+    # For now, we'll return a hardcoded list of example events.
+    mock_events = [
+        {"id": 1, "user": "alice", "action": "LOGIN_SUCCESS", "is_anomaly": False, "timestamp": "2025-10-03T21:30:00Z"},
+        {"id": 2, "user": "bob", "action": "UPLOAD_FILE", "file_id": "file-123", "is_anomaly": False, "timestamp": "2025-10-03T21:32:00Z"},
+        {"id": 3, "user": "unknown", "action": "LOGIN_FAIL", "is_anomaly": True, "timestamp": "2025-10-03T21:33:00Z"},
+        {"id": 4, "user": "alice", "action": "DOWNLOAD_FILE", "file_id": "file-456", "is_anomaly": False, "timestamp": "2025-10-03T21:35:00Z"},
+    ]
+    return jsonify({"success": True, "events": mock_events})
+    
 # ✅ ADD THIS CRITICAL CODE TO START THE SERVER
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
